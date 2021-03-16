@@ -11,10 +11,18 @@ end
 class Board
   attr_accessor :board_nodes
 
+  KNIGHT_MOVE_SET = [
+    [2, 1], [2, -1], 
+    [-2, 1], [-2, -1], 
+    [1, 2], [1, -2], 
+    [-1, 2], [-1, -2] 
+  ]
+
   def initialize
     @board_nodes = place_nodes
   end
 
+  # Populate board with nodes
   def place_nodes
     x = 0
     y = 0
@@ -68,6 +76,8 @@ class Board
     end
 
   end
+
+
 
 end
 
