@@ -35,10 +35,43 @@ class Board
     nodes
   end
 
+  def print_board
+    i = 0
+    r = 0
+    row = ""
+    puts_order = []
 
+    72.times do
+
+      unless @board_nodes[i].nil?
+
+        puts_order << "#{row}#{@board_nodes[i].id}" if i === 63
+
+        if r <= 7
+          row += r === 7 ? "#{@board_nodes[i].id}" : "#{@board_nodes[i].id}-+-"
+          i += 1
+          r += 1
+        else
+          puts_order << row
+          row = ""
+          r = 0
+        end
+      end
+
+    end
+
+    i = puts_order.length
+
+    until i === 0
+      i -= 1
+      puts puts_order[i]
+    end
+
+  end
 
 end
 
 b = Board.new
 
 # puts b.place_nodes.inspect
+b.print_board
