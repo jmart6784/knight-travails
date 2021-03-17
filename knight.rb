@@ -77,7 +77,9 @@ class Board
 
   end
 
-
+  def get_node(id)
+    @board_nodes.each { |node| return node if node.id === id }
+  end
 
 end
 
@@ -85,3 +87,5 @@ b = Board.new
 
 # puts b.place_nodes.inspect
 b.print_board
+
+puts b.get_node([0, 2]).inspect
