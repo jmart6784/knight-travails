@@ -1,7 +1,7 @@
 class Node
   attr_accessor :id, :legal_moves, :parent
 
-  def initialize(id)
+  def initialize(id, legal_moves = [])
     @id = id
     @legal_moves = legal_moves
     @parent = @parent
@@ -20,6 +20,13 @@ class Board
 
   def initialize
     @board_nodes = place_nodes
+
+    # Give each board node their possible moves when the king piece is on
+    @board_nodes.each do |node|
+      KNIGHT_MOVE_SET.each do |move|
+        get_legal_moves(move[0], move[1], node)
+      end
+    end
   end
 
   # Populate board with nodes
@@ -81,11 +88,20 @@ class Board
     @board_nodes.each { |node| return node if node.id === id }
   end
 
+  # Check all legal knight moves a node has
+  def get_legal_moves(x, y, node)
+    condition = node.id[0] + x > 7 || 
+                node.id[0] + x < 0 || 
+                node.id[1] + y > 7 || 
+                node.id[1] + y < 0
+
+    unless condition
+      node.legal_moves << [node.id[0] + x, node.id[1] + y]
+    end
+  end
+
 end
 
 b = Board.new
 
-# puts b.place_nodes.inspect
 b.print_board
-
-puts b.get_node([0, 2]).inspect
