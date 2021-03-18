@@ -121,12 +121,24 @@ class Board
       end
     end
 
-    history.inspect
+    history
   end
+
+  def knight_moves(start_node, end_node)
+    bfs(start_node)
+    move_path = [end_node]
+    current = get_node(end_node)
+
+    until current.id == start_node
+      current = get_node(current.parent)
+      move_path << current.id
+    end
+    move_path.reverse
+  end 
 
 end
 
 b = Board.new
 
 # b.print_board
-b.bfs
+puts b.knight_moves([3,3],[4,3]).inspect
