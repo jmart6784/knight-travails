@@ -100,8 +100,33 @@ class Board
     end
   end
 
+  def bfs(id = [0, 0])
+    history = []
+    queue = [id]
+    parents = [id]
+
+    until queue.empty?
+      if history.include?(queue.first)
+        queue.shift 
+      else
+        get_node(queue.first).legal_moves.each do |move|
+          # Add parent node
+          get_node(move).parent = queue.first unless parents.include?(move)
+          parents << move
+          queue << move
+        end
+
+        history << queue.first
+        queue.shift
+      end
+    end
+
+    history.inspect
+  end
+
 end
 
 b = Board.new
 
-b.print_board
+# b.print_board
+b.bfs
