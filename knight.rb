@@ -140,5 +140,8 @@ end
 
 b = Board.new
 
-# b.print_board
-puts b.knight_moves([3,3],[4,3]).inspect
+path = b.knight_moves([3,3],[4,3])
+
+puts "You made it in #{path.length} moves! Here's your path:"
+
+path.each { |move| puts move.inspect }
